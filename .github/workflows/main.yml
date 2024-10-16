@@ -6,20 +6,18 @@ on:
   issues :
     types : [ opened ]
 
-  jobs: 
-    build :
-      runs-on: ubuntu-latest
+jobs: 
+  build :
+    runs-on: ubuntu-latest
 
-      sttategy:
-        matrix :
-          node-version : [ 12.x ] 
-
-
-      steps :
-      -uses: actions/checkout@v2
-      -name: Use Node.js ${{ matrix.node-version }}
+    strategy:
+      matrix :
+        node-version : [ 12.x ] 
+    steps :
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
-       with:
-       node-version:  ${{ matrix.node-version}}
-      -run: npm i
-      -run: npm run build --if-present
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm i
+    - run: npm run build --if-present
